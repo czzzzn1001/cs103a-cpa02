@@ -1,0 +1,32 @@
+<div class="jumbotron">
+  <h1>cpa02: Student Query</h1>
+  <p></p>
+</div>
+
+<p class="p-3 m-3 border border-primary bg-light">
+  This app supports student query feature!
+</p>
+
+<% if (true || loggedIn) {%>
+<form method="post" action="/students/byMajor">
+  Show Students by Major:
+  <input type="text" name="major" placeholder="e.g. Politics" />
+  <input type="submit" />
+</form>
+<br />
+<form method="post" action="/students/byAge">
+  Show Students by Age range:
+  <input type="text" name="min age" placeholder="minimum e.g. 26" />
+  <input type="text" name="max age" placeholder="maximum e.g. 26" />
+  <input type="submit" />
+</form>
+<br />
+<form method="post" action="/students/byName">
+  Show Students by SAT range:
+  <input type="text" name="min SAT" placeholder="minimum e.g. 1577" />
+  <input type="text" name="max SAT" placeholder="maximum e.g. 1842" />
+  <input type="submit" />
+</form>
+<br />
+
+<% } %>
