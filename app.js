@@ -139,7 +139,7 @@ app.get("/upsertDB", async (req, res, next) => {
 
 const port = process.env.PORT || 5000;;
 app.set("port", port);
-app.listen(PORT, () => {
+app.listen(port, () => {
   console.log(`Our app is running on port ${ PORT }`);
 });
 
