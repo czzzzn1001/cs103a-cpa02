@@ -137,17 +137,17 @@ app.get("/upsertDB", async (req, res, next) => {
     res.render("error");
   });
 
-const port = process.env.PORT || 5000;;
+const port = process.env.PORT || 5151;;
 app.set("port", port);
 app.listen(port, () => {
-  console.log(`Our app is running on port ${ PORT }`);
+  console.log(`Our app is running on port ${ port }`);
 });
 
 
 const http = require("http");
 const server = http.createServer(app);
 
-server.listen(port);
+// server.listen(port);
 
 function onListening() {
   var addr = server.address();
