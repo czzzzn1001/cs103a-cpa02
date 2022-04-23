@@ -137,7 +137,7 @@ app.get("/upsertDB", async (req, res, next) => {
     res.render("error");
   });
 
-const port = "5151";
+const port = process.env.PORT || 5000;
 app.set("port", port);
 
 
