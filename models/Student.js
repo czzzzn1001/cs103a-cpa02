@@ -5,17 +5,17 @@ const ObjectId = Schema.Types.ObjectId;
 const Mixed = Schema.Types.Mixed;
 
 var studentSchema = Schema( {
-    id: Number,
-    lastName:String,
-    firstName:String,
-    city:String,
-    state:String,
-    major:String,
-    country:String,
-    age:Number,
-    sat:Number,
-    grade:Number,
-    height:Number
+    ID: Number,
+    LastName:String,
+    FirstName:String,
+    City:String,
+    State:String,
+    Major:String,
+    Country:String,
+    Age:Number,
+    SAT:Number,
+    Grade:Number,
+    Height:Number
 } );
 
 module.exports = mongoose.model( 'Student', studentSchema );
