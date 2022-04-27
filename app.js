@@ -13,7 +13,7 @@ const Student = require("./models/Student");
 const students = require("./public/data/StudentJson.json");
 
 const mongoose = require("mongoose");
-const mongodb_URI = "mongodb+srv://cz:cz001001@cluster0.nkstg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const mongodb_URI = process.env.mongodb_URI||"mongodb+srv://cz:cz001001@cluster0.nkstg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 mongoose.connect(mongodb_URI, {
     useNewUrlParser: true,
@@ -137,7 +137,7 @@ app.get("/upsertDB", async (req, res, next) => {
     res.render("error");
   });
 
-const port = process.env.PORT || 5151;;
+const port = process.env.PORT || 5000;;
 app.set("port", port);
 app.listen(port, () => {
   console.log(`Our app is running on port ${ port }`);
