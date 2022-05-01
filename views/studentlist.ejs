@@ -1,0 +1,43 @@
+<h1>The students are</h1>
+<hr>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>LastName</th>
+            <th>FirstName</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Gender</th>
+            <th>StudentStatus</th>
+            <th>Major</th>
+            <th>Country</th>
+            <th>Age</th>
+            <th>SAT</th>
+            <th>Grade</th>
+            <th>Height</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    <% for (student of students) {
+        
+         %>
+      <tr class="mb-2"> 
+        <td><%= student['ID'] %></td>
+        <td><%= student['LastName'] %></td>
+        <td><%= student['FirstName'] %></td>
+        <td><%= student['City'] %></td>
+        <td><%= student['State'] %></td>
+        <td><%= student['Gender'] %></td>
+        <td><%= student['StudentStatus'] %></td>
+        <td><%= student['Major'] %></td>
+        <td><%= student['Country'] %></td>
+        <td><%= student['Age'] %></td>
+        <td><%= student['SAT'] %></td>
+        <td><%= student['Grade'] %></td>
+        <td><%= student['Height'] %></td>
+    </tr>
+    <% } %>
+    </tbody>
+</table>

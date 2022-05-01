@@ -13,7 +13,7 @@ const Student = require("./models/Student");
 const students = require("./public/data/StudentJson.json");
 
 const mongoose = require("mongoose");
-const mongodb_URI = "mongodb+srv://cz:cz001001@cluster0.nkstg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const mongodb_URI = process.env.mongodb_URI||"mongodb+srv://cz:cz001001@cluster0.nkstg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 mongoose.connect(mongodb_URI, {
     useNewUrlParser: true,
@@ -65,14 +65,89 @@ app.get("/about", (req, res, next) => {
     res.render("about");
 });
 
-const port = "5151";
+app.get("/upsertDB", async (req, res, next) => {
+    for (student of students) {
+      const {ID} = student;
+      await Student.findOneAndUpdate(
+        {ID:ID},
+        student,
+        { upsert: true }
+      );
+    }
+    const num = await Student.find({}).count();
+    res.send("data uploaded: " + num);
+  });
+
+
+  app.post(
+    "/students/byMajor",
+    async (req, res, next) => {
+      const { major } = req.body;
+      const students = await Student.find({
+        Major: major,
+      }).sort({ ID:1 });
+  
+      res.locals.students = students;
+      
+      res.render("studentlist");
+    }
+  );
+  
+  app.post(
+    "/students/byAge",
+    async (req, res, next) => {
+      const { min_age,max_age } = req.body;
+      const students = await Student.find({
+        Age:{$gt:min_age, $lt:max_age}
+      }).sort({ ID:1 });
+  
+      res.locals.students = students;
+      
+      res.render("studentlist");
+    }
+  ); 
+
+
+  app.post(
+    "/students/bySAT",
+    async (req, res, next) => {
+      const { min_SAT,max_SAT } = req.body;
+      const students = await Student.find({
+        SAT:{$gt:min_SAT, $lt:max_SAT}
+      }).sort({ ID:1 });
+  
+      res.locals.students = students;
+      
+      res.render("studentlist");
+    }
+  ); 
+
+
+
+  app.use(function (req, res, next) {
+    next(createError(404));
+  });
+  
+
+  app.use(function (err, req, res, next) {
+    res.locals.message = err.message;
+    res.locals.error = req.app.get("env") === "development" ? err : {};
+
+    res.status(err.status || 500);
+    res.render("error");
+  });
+
+const port = process.env.PORT || 5000;;
 app.set("port", port);
+app.listen(port, () => {
+  console.log(`Our app is running on port ${ port }`);
+});
 
 
 const http = require("http");
 const server = http.createServer(app);
 
-server.listen(port);
+// server.listen(port);
 
 function onListening() {
   var addr = server.address();
